@@ -409,7 +409,9 @@ if (GGML_CUDA)
             if (GGML_MUSA)
                 list(APPEND GGML_EXTRA_LIBS_PRIVATE MUSA::musart MUSA::mublas)
             else()
-                list(APPEND GGML_EXTRA_LIBS_PRIVATE CUDA::cudart CUDA::cublas CUDA::cublasLt)
+                # Fix for TACC custom CUBLAS path
+                # list(APPEND GGML_EXTRA_LIBS_PRIVATE CUDA::cudart CUDA::cublas CUDA::cublasLt)
+                list(APPEND GGML_EXTRA_LIBS_PRIVATE CUDA::cudart "/opt/apps/nvidia_math/12.4/lib64/libcublas.so" "/opt/apps/nvidia_math/12.4/lib64/libcublasLt.so")
             endif()
         endif()
 
